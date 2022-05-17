@@ -1,0 +1,20 @@
+.c-header {
+    background-color: rgba(0, 0, 0, 0.527);
+    width: 100%;
+
+    .link {
+        color: rgb(255, 255, 255);
+        font-size: 1.4rem;
+        text-decoration: none;
+        font-weight: bold;
+        transition: all 0.3s;
+        padding: 6px;
+    }
+
+    .link:hover {
+        color: #ffd724;
+        font-weight: bolder;
+        transition: all 0.3s;
+    }
+
+}

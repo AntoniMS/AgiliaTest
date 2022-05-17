@@ -1,0 +1,64 @@
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  
+    img {
+      border-radius: 50%;
+      border: 3px solid rgb(0, 6, 37);
+    }
+  
+    .detail {
+      width: 80%;
+      border-radius: 10%;
+      border: 3px solid rgba(77, 77, 77, 0.623);
+    }
+  
+    .btn {
+      display: inline-block;
+      outline: none;
+      cursor: pointer;
+      font-weight: 600;
+      margin: 5px;
+      padding: 5px;
+      border-radius: 5px;
+      border: 3px solid rgba(0, 0, 0, 0.5);
+      background: #259dff3d;
+      line-height: 1.15;
+      font-size: 14px;
+      transition: all 0.2s;
+    }
+  
+    .btn:hover {
+      background: #0068f0;
+      color: #ffffff;
+      border: 3px solid rgb(0, 41, 128);
+      border-radius: 10px;
+      transition: all 0.2s;
+    }
+  }
+
+  .card {
+    min-width: 250px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 900;
+    border: 3px solid rgba(0, 0, 0, 0.116);
+    background-color: whitesmoke;
+    margin: 10px;
+    border-radius: 9px;
+    padding: 20px;
+    transition: 0.6s;
+  }
+  
+  .card:hover {
+    border: 3px solid rgb(0, 110, 255);
+    background-color: rgb(255, 252, 236);
+    transition: 0.3s;
+  }
+
+  .text-link {
+    color: inherit;
+    text-decoration: inherit;
+}

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import "./Pagination.scss";
+
 
 export default function Pagination({
     getUsers,
@@ -15,9 +17,9 @@ export default function Pagination({
         }
     };
     return (
-        <div>
+        <div className="c-pagination">
             {currentPage > 1 ? (
-                <button onClick={() => changePage(currentPage - 1)}>
+                <button className="p-button" onClick={() => changePage(currentPage - 1)}>
                     ⬅
                 </button>
             ) : (
@@ -26,7 +28,7 @@ export default function Pagination({
 
             <span> {currentPage} </span>
             {currentPage < pages ? (
-                <button onClick={() => changePage(currentPage + 1)}>
+                <button className="p-button" onClick={() => changePage(currentPage + 1)}>
                     ➡
                 </button>
             ) : (

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import UserCard from "../../components/UserCard/UserCard";
 import Pagination from "../../components/Pagination/Pagination";
 import AddUser from "../../components/AddUser/AddUser";
+import "./UsersPage.scss";
 
 
 export default function UsersPage() {
@@ -40,11 +41,9 @@ export default function UsersPage() {
             },
         })
             .then((res) => {
-                if (res.status !== 201) {
-                    return;
-                } else {
+                if (res.status === 201) {
                     return res.json();
-                }
+                } 
             })
             .then((data) => {
                 setUsers((users) => [...users, data]);
@@ -69,11 +68,9 @@ export default function UsersPage() {
             },
         })
             .then((res) => {
-                if (res.status !== 200) {
-                    return;
-                } else {
+                if (res.status === 200) {
                     return res.json();
-                }
+                } 
             })
             .then((data) => {
                 setUsers(users.map(user => user.id !== userId ? user : {
@@ -98,9 +95,7 @@ export default function UsersPage() {
         setIsLoaded(true)
         await fetch(`https://reqres.in/api/users/${id}`)
             .then((res) => {
-                if (res.status !== 200) {
-                    return;
-                } else {
+                if (res.status === 200 || res.status === 404) {
                     setUsers(
                         users.filter((user) => {
                             return user.id !== id;

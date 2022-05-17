@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import "./AddUser.scss";
 
 const defaultForm = {
     id: null,
@@ -9,7 +10,7 @@ const defaultForm = {
   }
 
 const AddUser = ({ onAdd, onEdit, user }) => {
-    const [form, setForm] = useState({defaultForm})
+    const [form, setForm] = useState({...defaultForm})
 
     useEffect(() => {
       if (user) {
@@ -45,16 +46,19 @@ const AddUser = ({ onAdd, onEdit, user }) => {
     }
 
     return (
-        <div>
+        <div className="c-form">
             <form onSubmit={handleOnSubmit}>
                 <h2>{ user ? 'Edit User' : 'Create User' }</h2>
+                <div>
                 <input type="text" placeholder="First Name" name="first_name" onChange={handleChange} value={form.first_name} required/>
                 <input type="text" placeholder="Last Name" name="last_name" onChange={handleChange} value={form.last_name} required/>
+                </div>
+                <div>
                 <input type="text" placeholder="Email" name="email" onChange={handleChange} value={form.email} required/>
                 <input type="text" placeholder="Avatar"  name="avatar" onChange={handleChange} value={form.avatar}/>
+                </div>
                 <input type='reset' value='Reset' onClick={handleReset}></input>
-                <button onSubmit={handleOnSubmit}>{ user ? 'Edit User' : 'Create User' }</button>
-                <hr />
+                <button className="btn" onSubmit={handleOnSubmit}>{ user ? 'Edit User' : 'Create User' }</button>
             </form>
         </div>
     );
