@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import UserCard from "../../components/UserCard/UserCard";
 import Pagination from "../../components/Pagination/Pagination";
+import AddUser from "../../components/AddUser/AddUser";
 
 
 export default function UsersPage() {
@@ -21,6 +22,36 @@ export default function UsersPage() {
         getUsers();
         setIsLoaded(true);
     }, []);
+
+
+    const onAdd = async (first_name, last_name, avatar, email) => {
+        await fetch("https://reqres.in/api/users", {
+            method: "POST",
+            body: JSON.stringify({
+                first_name: first_name,
+                last_name: last_name,
+                avatar: avatar,
+                email: email,
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        })
+            .then((res) => {
+                if (res.status !== 201) {
+                    return;
+                } else {
+                    return res.json();
+                }
+            })
+            .then((data) => {
+                setUsers((users) => [...users, data]);
+                console.log(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    };
 
     const onDelete = async (id) => {
         setIsLoaded(true)
@@ -47,12 +78,13 @@ export default function UsersPage() {
             {!isLoaded ? (
                 <div>
                     <img
-                        src="../../../public/assets/loading.gif"
+                        src="./assets/loading.gif"
                         alt="Loading gif"
                     />
                 </div>
             ) : (
                 <div>
+                    <AddUser onAdd={onAdd} />
                     <Pagination getUsers={getUsers} totalPages={totalPages} />
                     <div className="container">
                         {users.map((user) => (
