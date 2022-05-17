@@ -3,6 +3,8 @@
 
 This app is a CRUD (Create, Read, Update and Delete) using React, that gives functionality to fake API:https://reqres.in/
 
+![Animation](https://user-images.githubusercontent.com/95292138/168859255-fcde132a-ab63-499c-b843-d1381fcddc9a.gif)
+
 ## Features:
 
 * View the profile of all users.
