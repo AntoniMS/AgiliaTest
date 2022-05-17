@@ -9,6 +9,8 @@ export default function UsersPage() {
     const [users, setUsers] = useState([]);
     const [totalPages, setTotalPages] = useState(0);
     const [isLoaded, setIsLoaded] = useState(false);
+    const [editingUser, setEditingUser] = useState(null);
+
 
     const getUsers = async (newPage = 1) => {
         const res = await axios(
@@ -53,6 +55,45 @@ export default function UsersPage() {
             });
     };
 
+    const onEdit = async (userId, first_name, last_name, avatar, email) => {
+        await fetch(`https://reqres.in/api/users/${userId}`, {
+            method: "PUT",
+            body: JSON.stringify({
+                first_name: first_name,
+                last_name: last_name,
+                avatar: avatar,
+                email: email,
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8",
+            },
+        })
+            .then((res) => {
+                if (res.status !== 200) {
+                    return;
+                } else {
+                    return res.json();
+                }
+            })
+            .then((data) => {
+                setUsers(users.map(user => user.id !== userId ? user : {
+                    ...user,
+                    first_name,
+                    last_name,
+                    avatar,
+                    email,
+                }))
+                console.log(data)
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
+    const onStartEdit = (user) => {
+        setEditingUser(user)
+    }
+
     const onDelete = async (id) => {
         setIsLoaded(true)
         await fetch(`https://reqres.in/api/users/${id}`)
@@ -84,7 +125,7 @@ export default function UsersPage() {
                 </div>
             ) : (
                 <div>
-                    <AddUser onAdd={onAdd} />
+                    <AddUser onAdd={onAdd} onEdit={onEdit} user={editingUser} />
                     <Pagination getUsers={getUsers} totalPages={totalPages} />
                     <div className="container">
                         {users.map((user) => (
@@ -96,6 +137,7 @@ export default function UsersPage() {
                                 avatar={user.avatar}
                                 email={user.email}
                                 onDelete={onDelete}
+                                onEdit={onStartEdit}
                             />
                         ))}
                     </div>

@@ -1,10 +1,14 @@
 import React from "react";
 import { Link, generatePath } from "react-router-dom";
 
-export default function UserCard({ id, first_name, last_name, avatar, email, onDelete }) {
+export default function UserCard({ id, first_name, last_name, avatar, email, onDelete, onEdit }) {
 
   const deleteUser = () => {
     onDelete(id);
+  }
+
+  const editUser = () => {
+    onEdit({id, first_name, last_name, avatar, email})
   }
 
   return (
@@ -16,7 +20,7 @@ export default function UserCard({ id, first_name, last_name, avatar, email, onD
       </Link>
       <h4>Email: {email}</h4>
       <div>
-        <button className="btn">Edit</button>
+        <button className="btn" onClick={editUser}>Edit</button>
         <button className="btn" onClick={deleteUser}>Delete</button>
       </div>
     </figure>
