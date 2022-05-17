@@ -5,12 +5,11 @@ This app is a CRUD (Create, Read, Update and Delete) using React, that gives fun
 
 ## Features:
 
-View the profile of all users.
-Have a user's profile in detail by clicking on it.
-Create new users using the form on the main page.
-Modify the data of a user by clicking on the edit button, and thus be able to replace the data in the form.
-Delete user by clicking on the delete button.
-
+* View the profile of all users.
+* Have a user's profile in detail by clicking on it.
+* Create new users using the form on the main page.
+* Modify the data of a user by clicking on the edit button, and thus be able to replace the data in the form.
+* Delete user by clicking on the delete button.
 
 ## Available Scripts
 
