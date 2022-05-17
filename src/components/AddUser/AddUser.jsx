@@ -9,7 +9,7 @@ const defaultForm = {
     avatar:''
   }
 
-const AddUser = ({ onAdd, onEdit, user }) => {
+const AddUser = ({ onAdd, onEdit, user, onStopEdit }) => {
     const [form, setForm] = useState({...defaultForm})
 
     useEffect(() => {
@@ -26,23 +26,24 @@ const AddUser = ({ onAdd, onEdit, user }) => {
         [e.target.name]: e.target.value
       })
     }
-
-    const handleReset = () => {
-      onEdit(user.id, user.first_name, user.last_name, user.avatar, user.email);
-      setForm(defaultForm)
-    }
     
     const handleOnSubmit = (e) => {
         if (e) {
           e.preventDefault();
         }
-    
         if (user) {
-            onEdit(user.id, e.target.first_name.value, e.target.last_name.value, e.target.avatar.value, e.target.email.value);
+          onEdit(user.id, e.target.first_name.value, e.target.last_name.value, e.target.avatar.value, e.target.email.value);
+          onStopEdit();
         } else {
-            onAdd(e.target.first_name.value, e.target.last_name.value, e.target.avatar.value, e.target.email.value);
+          onAdd(e.target.first_name.value, e.target.last_name.value, e.target.avatar.value, e.target.email.value);
         }
         setForm(defaultForm)
+    }
+
+    const handleReset = () => {
+      onEdit(user.id, user.first_name, user.last_name, user.avatar, user.email);
+      setForm(defaultForm)
+      onStopEdit();
     }
 
     return (
@@ -57,7 +58,7 @@ const AddUser = ({ onAdd, onEdit, user }) => {
                 <input type="text" placeholder="Email" name="email" onChange={handleChange} value={form.email} required/>
                 <input type="text" placeholder="Avatar"  name="avatar" onChange={handleChange} value={form.avatar}/>
                 </div>
-                <input type='reset' value='Reset' onClick={handleReset}></input>
+                  { user ? <input type='reset' value='Back' onClick={handleReset}></input> : ''}
                 <button className="btn" onSubmit={handleOnSubmit}>{ user ? 'Edit User' : 'Create User' }</button>
             </form>
         </div>

@@ -14,8 +14,7 @@ export default function UsersPage() {
 
 
     const getUsers = async (newPage = 1) => {
-        const res = await axios(
-            "https://reqres.in/api/users?page=" + newPage);
+        const res = await axios("https://reqres.in/api/users?page=" + newPage);
         console.log(res.data.data);
         setUsers(res.data.data);
         setTotalPages(res.data.total_pages);
@@ -91,6 +90,11 @@ export default function UsersPage() {
         setEditingUser(user)
     }
 
+    const onStopEdit = () => {
+        setEditingUser(null)
+    }
+
+
     const onDelete = async (id) => {
         setIsLoaded(true)
         await fetch(`https://reqres.in/api/users/${id}`)
@@ -109,6 +113,8 @@ export default function UsersPage() {
             });
     }
 
+
+
     return (
         <div>
             {!isLoaded ? (
@@ -120,7 +126,7 @@ export default function UsersPage() {
                 </div>
             ) : (
                 <div>
-                    <AddUser onAdd={onAdd} onEdit={onEdit} user={editingUser} />
+                    <AddUser onAdd={onAdd} onEdit={onEdit} user={editingUser} onStopEdit={onStopEdit} />
                     <Pagination getUsers={getUsers} totalPages={totalPages} />
                     <div className="container">
                         {users.map((user) => (
