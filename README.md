@@ -1,4 +1,4 @@
-# Agilia
+
 # Users CRUD React
 
 This app is a CRUD (Create, Read, Update and Delete) using React, that gives functionality to fake API:https://reqres.in/
